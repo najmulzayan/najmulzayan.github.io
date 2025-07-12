@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Md Najmul's Portfolio</title>
+  <title> Najmul Zayan</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <style>
     body {
@@ -40,6 +40,9 @@
     @keyframes glow {
       from {
         box-shadow: 0 0 10px #00ffd5, 0 0 20px #00ffd5;
+        
+        
+       
       }
       to {
         box-shadow: 0 0 25px #00ffd5, 0 0 35px #00ffd5, 0 0 45px #00ffd5;
@@ -132,6 +135,46 @@
         font-size: 24px;
       }
     }
+    
+    
+    
+    
+    
+ #messenger-icon {
+  position: fixed;
+  top: 100px;
+  right: 20px;
+  width: 60px;
+  height: 60px;
+  background: white;
+  border-radius: 50%;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  cursor: grab;
+  user-select: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  touch-action: none;
+  transition: box-shadow 0.2s ease;
+}
+
+#messenger-icon:active {
+  cursor: grabbing;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+  transition: none;
+}
+
+#messenger-icon img {
+  width: 65px;
+  height: 65px;
+  pointer-events: none;
+  user-select: none;
+}
+    
+    
+    
+    
   </style>
 </head>
 <body>
@@ -139,8 +182,9 @@
   <header>
     <div class="glow-img">
       <img src="img.jpg" alt="Md Najmul's Photo">
-    </div>
-    <h1>Najmul Zayan</h1>
+  </div>
+    <h1>
+  Najmul Zayan</h1>
     <p>Web Developer | Programmer | Dreamer</p>
   </header>
 
@@ -201,9 +245,7 @@
       
       
       <a href="https://tiktok.com/@najmul.zayan" target="_blank" title="TikTok"><i class="fab fa-tiktok"></i></a>
-
-
-      <a href="https://www.youtube.com/@najmulzayan" target="_blank" title="YouTube"><i class="fab fa-youtube"></i></a>
+      
       
       <a href="https://github.com/najmulzayan" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
       
@@ -244,6 +286,91 @@
       <a href="https://www.upwork.com/freelancers/~najmulzayan" target="_blank" title="Upwork"><i class="fas fa-rocket"></i></a>
     </div>
   </section>
+  
+  
+  
+  
+  
+  
+<a href="https://m.me/mdnajmulx" target="_blank" id="messenger-icon">
+  <img src="mesen.png" alt="Messenger Icon" />
+</a>
+  
+  
+  <script>
+    
+    const icon = document.getElementById("messenger-icon");
+
+let isDragging = false,
+  startX = 0,
+  startY = 0,
+  origX = 0,
+  origY = 0;
+
+// Start dragging
+function dragStart(x, y) {
+  isDragging = true;
+  startX = x;
+  startY = y;
+  const rect = icon.getBoundingClientRect();
+  origX = rect.left;
+  origY = rect.top;
+  icon.style.transition = "none";
+}
+
+// During dragging
+function dragMove(x, y) {
+  if (!isDragging) return;
+  let dx = x - startX;
+  let dy = y - startY;
+  
+  let newX = origX + dx;
+  let newY = origY + dy;
+  
+  // Prevent going out of viewport
+  const maxX = window.innerWidth - icon.offsetWidth;
+  const maxY = window.innerHeight - icon.offsetHeight;
+  newX = Math.min(Math.max(0, newX), maxX);
+  newY = Math.min(Math.max(0, newY), maxY);
+  
+  icon.style.left = newX + "px";
+  icon.style.top = newY + "px";
+  icon.style.right = "auto";
+}
+
+// End dragging
+function dragEnd() {
+  if (!isDragging) return;
+  isDragging = false;
+  icon.style.transition = "box-shadow 0.2s ease";
+}
+
+// Mouse events
+icon.addEventListener("mousedown", e => {
+  e.preventDefault();
+  dragStart(e.clientX, e.clientY);
+});
+window.addEventListener("mousemove", e => {
+  dragMove(e.clientX, e.clientY);
+});
+window.addEventListener("mouseup", e => {
+  dragEnd();
+});
+
+// Touch events
+icon.addEventListener("touchstart", e => {
+  const t = e.touches[0];
+  dragStart(t.clientX, t.clientY);
+}, { passive: false });
+window.addEventListener("touchmove", e => {
+  const t = e.touches[0];
+  dragMove(t.clientX, t.clientY);
+}, { passive: false });
+window.addEventListener("touchend", e => {
+  dragEnd();
+});
+  </script>
+  
 
 </body>
 </html>
